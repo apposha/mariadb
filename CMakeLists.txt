@@ -155,7 +155,7 @@ INCLUDE(misc)
 INCLUDE(mysql_version)
 INCLUDE(cpack_source_ignore_files)
 INCLUDE(install_layout)
-INCLUDE(submodules)
+#INCLUDE(submodules)
 
 # Add macros
 INCLUDE(character_sets)

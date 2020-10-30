@@ -3,7 +3,7 @@
 	url = https://github.com/MariaDB/mariadb-connector-c.git
 [submodule "storage/rocksdb/rocksdb"]
 	path = storage/rocksdb/rocksdb
-	url = https://github.com/facebook/rocksdb.git
+	url = https://github.com/apposha/rockslake
 [submodule "wsrep-lib"]
 	path = wsrep-lib
 	url = https://github.com/codership/wsrep-lib.git

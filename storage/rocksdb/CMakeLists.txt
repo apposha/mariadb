@@ -23,6 +23,8 @@ IF(WITH_VALGRIND)
   ADD_DEFINITIONS(-DROCKSDB_VALGRIND_RUN=1)
 ENDIF()
 
+ADD_DEFINITIONS(-DUSE_AWS)
+
 # We've had our builders hang during the build process. This prevents MariaRocks
 # to be built on 32 bit intel OS kernels.
 IF(CMAKE_SYSTEM_PROCESSOR MATCHES "i[36]86")
@@ -167,7 +169,7 @@ ADD_CONVENIENCE_LIBRARY(rocksdb_aux_lib
 ADD_DEPENDENCIES(rocksdb_aux_lib GenError)
 
 # MARIAROCKS-TODO: how to properly depend on -lrt ?
-TARGET_LINK_LIBRARIES(rocksdb_aux_lib rocksdblib ${ZLIB_LIBRARY})
+TARGET_LINK_LIBRARIES(rocksdb_aux_lib rocksdblib ${ZLIB_LIBRARY} -laws-cpp-sdk-s3 -laws-cpp-sdk-kinesis -laws-cpp-sdk-core -laws-cpp-sdk-transfer)
 if (UNIX AND NOT APPLE)
   TARGET_LINK_LIBRARIES(rocksdb_aux_lib -lrt)
 endif()
@@ -231,7 +233,7 @@ ADD_LIBRARY(rocksdb_tools STATIC
 )
 
 MYSQL_ADD_EXECUTABLE(sst_dump rocksdb/tools/sst_dump.cc COMPONENT rocksdb-engine)
-TARGET_LINK_LIBRARIES(sst_dump rocksdblib)
+TARGET_LINK_LIBRARIES(sst_dump rocksdblib -laws-cpp-sdk-s3 -laws-cpp-sdk-kinesis -laws-cpp-sdk-core -laws-cpp-sdk-transfer)
 
 MYSQL_ADD_EXECUTABLE(mariadb-ldb tools/mysql_ldb.cc COMPONENT rocksdb-engine)
 TARGET_LINK_LIBRARIES(mariadb-ldb rocksdb_tools rocksdb_aux_lib dbug)

@@ -31,6 +31,8 @@ else()
   endif()
 endif()
 
+ADD_DEFINITIONS(-DUSE_AWS)
+
 
 # Optional compression libraries.
 
@@ -210,6 +212,7 @@ set(ROCKSDB_SOURCES
         db/db_impl/db_impl_experimental.cc
         db/db_impl/db_impl_readonly.cc
         db/db_impl/db_impl_secondary.cc
+        db/db_impl/db_impl_remote_compaction.cc
         db/db_info_dumper.cc
         db/db_iter.cc
         db/dbformat.cc
@@ -357,7 +360,6 @@ set(ROCKSDB_SOURCES
         util/random.cc
         util/rate_limiter.cc
         util/slice.cc
-        util/file_checksum_helper.cc
         util/status.cc
         util/string_util.cc
         util/thread_local.cc
@@ -415,6 +417,20 @@ set(ROCKSDB_SOURCES
         utilities/ttl/db_ttl_impl.cc
         utilities/write_batch_with_index/write_batch_with_index.cc
         utilities/write_batch_with_index/write_batch_with_index_internal.cc
+        cloud/cloud_env.cc
+        cloud/cloud_env_impl.cc
+        cloud/cloud_env_options.cc
+        cloud/cloud_log_controller.cc
+        cloud/cloud_manifest.cc
+        cloud/cloud_storage_provider.cc
+        cloud/db_cloud_impl.cc
+        cloud/manifest_reader.cc
+        cloud/purge.cc
+        cloud/aws/aws_env.cc
+        cloud/aws/aws_kafka.cc
+        cloud/aws/aws_kinesis.cc
+        cloud/aws/aws_retry.cc
+        cloud/aws/aws_s3.cc
 )
 
 
